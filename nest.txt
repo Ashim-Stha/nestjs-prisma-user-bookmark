@@ -7,3 +7,4 @@ nest g module module_name --> cmd to create module
 -organize app into features -. breakdown into modules
 -controllers are responsible for handling incoming requests and returning responses
 -providers or services are responsible for executing business logic
+-@Injectable decorator for service allows to use dependency injection
