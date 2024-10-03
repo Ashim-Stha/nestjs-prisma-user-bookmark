@@ -1,1 +1,9 @@
 nest new . --> to start new nest project
+
+nest g module module_name --> cmd to create module
+
+-decorators add metadata to class or functions
+-module can import other modules and also import providers ,controllers - root module -> app module 
+-organize app into features -. breakdown into modules
+-controllers are responsible for handling incoming requests and returning responses
+-providers or services are responsible for executing business logic
