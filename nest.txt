@@ -1,7 +1,7 @@
 nest new . --> to start new nest project
 
 nest g module module_name --> cmd to create module
-nest g service service_name --no-spec --> not to create spec file
+nest g service service_name --no-spec --> not to create spec file 
 
 -decorators add metadata to class or functions
 -module can import other modules and also import providers ,controllers - root module -> app module 
