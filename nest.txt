@@ -14,3 +14,4 @@ yarn add -D prisma
 yarn add @prisma/client
 
 npx prisma init
+npx prisma migrate dev --> after creating models
