@@ -8,3 +8,9 @@ nest g module module_name --> cmd to create module
 -controllers are responsible for handling incoming requests and returning responses
 -providers or services are responsible for executing business logic
 -@Injectable decorator for service allows to use dependency injection
+
+for prisma
+yarn add -D prisma     
+yarn add @prisma/client
+
+npx prisma init
