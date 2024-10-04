@@ -16,6 +16,7 @@ yarn add @prisma/client
 
 npx prisma init
 npx prisma migrate dev --> after creating models
+npx prisma migrate deploy --> to apply migrations only
 npx prisma studio --> to open prisma client or GUI
 
 yarn add class-validator class-transformer
