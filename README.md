@@ -1,73 +1,156 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NestJS Prisma User Bookmark project
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This is a NestJS project that uses Prisma as the ORM for database interactions. The project includes authentication, user management, and bookmark management features.
 
-## Description
+- **Authentication**: Secure user authentication using JWT (JSON Web Tokens). This includes user registration, login, and token-based authentication to protect routes and resources.
+- **User Management**: CRUD (Create, Read, Update, Delete) operations for managing user profiles. Users can update their personal information and manage their accounts.
+- **Bookmark Management**: Functionality for users to create, read, update, and delete bookmarks. This feature allows users to save and manage their favorite links or resources.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Table of Contents
+
+- [NestJS Prisma User Bookmark project](#nestjs-prisma-user-bookmark-project)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Running the App](#running-the-app)
+  - [Environment Variables](#environment-variables)
+  - [Database Migrations](#database-migrations)
+  - [Project Structure](#project-structure)
+  - [Testing](#testing)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
-```bash
-$ yarn install
+1. Clone the repository:
+
+    ```sh
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+
+2. Install dependencies:
+
+    ```sh
+    yarn install
+    ```
+
+3. Set up the environment variables:
+
+    ```sh
+    cp .env.example .env
+    ```
+
+4. Update the .env file with your database connection string and JWT secret.
+
+## Running the App
+
+1. Start the PostgreSQL database using Docker:
+
+    ```sh
+    docker-compose up -d
+    ```
+
+2. Run the application:
+
+    ```sh
+    yarn start:dev
+    ```
+
+The application will be running at `http://localhost:3000`.
+
+## Environment Variables
+
+The following environment variables are used in this project:
+
+- `DATABASE_URL`: The connection string for the PostgreSQL database.
+- `JWT_SECRET`: The secret key for signing JWT tokens.
+
+## Database Migrations
+
+To run the database migrations, use the following commands:
+
+1. Initialize Prisma:
+
+    ```sh
+    npx prisma init
+    ```
+
+2. Run migrations:
+
+    ```sh
+    npx prisma migrate dev
+    ```
+
+3. Deploy migrations:
+
+    ```sh
+    npx prisma migrate deploy
+    ```
+
+4. Open Prisma Studio:
+
+    ```sh
+    npx prisma studio
+    ```
+
+## Project Structure
+
+```plaintext
+.env
+.env.example
+.eslintrc.js
+.gitignore
+.prettierrc
+docker-compose.yml
+nest-cli.json
+package.json
+prisma/
+  migrations/
+    20241003133001_init/
+    20241004085606_update_models/
+    migration_lock.toml
+  schema.prisma
+src/
+  app.module.ts
+  auth/
+    auth.controller.ts
+    auth.module.ts
+    auth.service.ts
+    dto/
+  bookmark/
+    bookmark.module.ts
+  main.ts
+  prisma/
+    prisma.module.ts
+    prisma.service.ts
+  user/
+test/
+  app.e2e-spec.ts
+  jest-e2e.json
+tsconfig.build.json
+tsconfig.json
+yarn-error.log
 ```
 
-## Running the app
+## Testing
 
-```bash
-# development
-$ yarn run start
+To run the tests, use the following command:
 
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+```sh
+yarn test
 ```
 
-## Test
+To run end-to-end tests:
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+```sh
+yarn test:e2e
 ```
 
-## Support
+## Contributing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License.
