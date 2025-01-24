@@ -1,5 +1,4 @@
-
-# NestJS Prisma User Bookmark project
+# NestJS Prisma User Bookmark Project
 
 This is a NestJS project that uses Prisma as the ORM for database interactions. The project includes authentication, user management, and bookmark management features.
 
@@ -9,8 +8,12 @@ This is a NestJS project that uses Prisma as the ORM for database interactions. 
 
 ## Table of Contents
 
-- [NestJS Prisma User Bookmark project](#nestjs-prisma-user-bookmark-project)
+- [NestJS Prisma User Bookmark Project](#nestjs-prisma-user-bookmark-project)
   - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Authentication](#authentication)
+    - [User Management](#user-management)
+    - [Bookmark Management](#bookmark-management)
   - [Installation](#installation)
   - [Running the App](#running-the-app)
   - [Environment Variables](#environment-variables)
@@ -19,6 +22,27 @@ This is a NestJS project that uses Prisma as the ORM for database interactions. 
   - [Testing](#testing)
   - [Contributing](#contributing)
   - [License](#license)
+
+## Features
+
+### Authentication
+
+- **Signup**: Users can register by providing an email and password. The password is hashed using Argon2 before being stored in the database.
+- **Signin**: Users can log in by providing their email and password. A JWT token is generated and returned upon successful authentication.
+- **JWT Strategy**: Protects routes by validating the JWT token provided in the Authorization header.
+
+### User Management
+
+- **Get Current User**: Users can retrieve their profile information.
+- **Edit User**: Users can update their email, first name, and last name.
+
+### Bookmark Management
+
+- **Create Bookmark**: Users can create a new bookmark by providing a title, description, and link.
+- **Get Bookmarks**: Users can retrieve a list of all their bookmarks.
+- **Get Bookmark by ID**: Users can retrieve a specific bookmark by its ID.
+- **Edit Bookmark**: Users can update the title, description, and link of a specific bookmark.
+- **Delete Bookmark**: Users can delete a specific bookmark.
 
 ## Installation
 
@@ -99,11 +123,13 @@ To run the database migrations, use the following commands:
 ```plaintext
 .env
 .env.example
+.env.test
 .eslintrc.js
 .gitignore
 .prettierrc
 docker-compose.yml
 nest-cli.json
+nest.txt
 package.json
 prisma/
   migrations/
@@ -111,26 +137,46 @@ prisma/
     20241004085606_update_models/
     migration_lock.toml
   schema.prisma
+README.md
 src/
   app.module.ts
   auth/
     auth.controller.ts
     auth.module.ts
     auth.service.ts
+    decorator/
+      get-user.decorator.ts
     dto/
+      auth.dto.ts
+      index.ts
+    guard/
+      jwt.guard.ts
+    strategy/
+      jwt.strategy.ts
   bookmark/
+    bookmark.controller.ts
     bookmark.module.ts
+    bookmark.service.ts
+    dto/
+      create-bookmark.dto.ts
+      edit-bookmark.dto.ts
+      index.ts
   main.ts
   prisma/
     prisma.module.ts
     prisma.service.ts
   user/
+    dto/
+      edit-user.dto.ts
+      index.ts
+    user.controller.ts
+    user.module.ts
+    user.service.ts
 test/
   app.e2e-spec.ts
   jest-e2e.json
 tsconfig.build.json
 tsconfig.json
-yarn-error.log
 ```
 
 ## Testing
@@ -154,3 +200,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License.
+```
