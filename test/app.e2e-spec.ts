@@ -138,7 +138,18 @@ describe('App e2e', () => {
   describe('Bookmarks', () => {
     describe('Create bookmark', () => {});
 
-    describe('Get bookmark', () => {});
+    describe('Get bookmark', () => {
+      it('should get bookmarks', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAccessToken}',
+          })
+          .expectStatus(200)
+          .expectBody([]);
+      });
+    });
 
     describe('Get bookmark by id', () => {});
 
