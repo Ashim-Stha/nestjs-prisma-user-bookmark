@@ -1,7 +1,6 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as pactum from 'pactum';
-import { emitWarning } from 'process';
 import { AppModule } from 'src/app.module';
 import { AuthDto } from 'src/auth/dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -35,13 +34,33 @@ describe('App e2e', () => {
   it.todo('should pass');
 
   describe('Auth', () => {
-    describe('Signup', () => {
-      it('should signup ', () => {
-        const dto: AuthDto = {
-          email: 'luffy@gmail.com',
-          password: 'luffy',
-        };
+    const dto: AuthDto = {
+      email: 'luffy@gmail.com',
+      password: 'luffy',
+    };
 
+    describe('Signup', () => {
+      it('should throw if email empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody({ password: dto.password })
+          .expectStatus(400);
+      });
+
+      it('should throw if password empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody({ email: dto.email })
+          .expectStatus(400);
+      });
+
+      it('should throw if no body provided', () => {
+        return pactum.spec().post('/auth/signup').expectStatus(400);
+      });
+
+      it('should signup ', () => {
         return pactum
           .spec()
           .post('/auth/signup')
@@ -51,7 +70,36 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Signin', () => {});
+    describe('Signin', () => {
+      it('should throw if email empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody({ password: dto.password })
+          .expectStatus(400);
+      });
+
+      it('should throw if password empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody({ email: dto.email })
+          .expectStatus(400);
+      });
+
+      it('should throw if no body provided', () => {
+        return pactum.spec().post('/auth/signin').expectStatus(400);
+      });
+
+      it('should signin', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody(dto)
+          .expectStatus(200)
+          .stores('userAccessToken', 'access_token');
+      });
+    });
   });
 
   describe('User', () => {
